@@ -1,0 +1,213 @@
+/* ==========================================================
+   PARTE 1: VARIABLES Y ESTILO RETRO-MATTE (PANTALLA)
+   ========================================================== */
+:root {
+    --loto-width: 70mm;
+    --loto-height: 140mm;
+    --bg-retro: #e8e2d6;      /* Crema mate */
+    --panel-retro: #f4f1ea;   /* Papel cálido */
+    --accent-orange: #d97706; /* Naranja quemado */
+    --accent-brown: #451a03;  /* Marrón chocolate */
+    --accent-gray: #4b5563;   /* Gris pizarra */
+}
+
+body { 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    background-color: var(--bg-retro); /* Fondo mate */
+    margin: 0; 
+    padding: 20px; 
+}
+
+/* ==========================================================
+   INTERFAZ DE CONTROL: ESTILO CASSETTE CLÁSICO
+   ========================================================== */
+
+/* La barra de búsqueda ahora tiene fondo oscuro mate para contraste */
+.no-print {
+    background: #2d2d2d; /* Negro carbón mate */
+    color: #e8e2d6;      /* Texto crema para lectura clara */
+    padding: 30px; 
+    border-radius: 4px;
+    max-width: 500px; 
+    margin: 0 auto 30px; 
+    border-left: 8px solid var(--accent-orange); /* Detalle de color lateral */
+    box-shadow: 12px 12px 0px rgba(0,0,0,0.2);
+}
+
+/* Estilo para los inputs (Barra buscadora) */
+input[type="text"] {
+    background-color: #3d3d3d;
+    border: 2px solid var(--accent-gray);
+    color: white;
+    padding: 12px;
+    font-family: 'Courier New', monospace; /* Toque retro de máquina */
+    border-radius: 2px;
+    width: 60%;
+    margin-bottom: 15px;
+}
+
+/* --- BOTONES CON ALTO CONTRASTE --- */
+
+/* Botón Buscar (Naranja Cassette) */
+button {
+    background-color: var(--accent-orange); /* #d97706 */
+    color: #451a03; /* Texto marrón oscuro para contraste mate */
+    border: none;
+    padding: 12px 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #451a03; /* Sombra sólida */
+}
+
+button:hover {
+    background-color: #f59e0b;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #451a03;
+}
+
+/* Botón Imprimir (Rojo Alerta / Grabación) */
+#btn-imprimir {
+    background-color: #b91c1c; /* Rojo intenso mate */
+    color: white;
+    margin-top: 15px;
+    width: 100%;
+    box-shadow: 4px 4px 0px #450a0a;
+}
+
+#btn-imprimir:hover {
+    background-color: #dc2626;
+    box-shadow: 6px 6px 0px #450a0a;
+}
+
+/* Previsualización en Pantalla: Solo muestra una unidad */
+#print-area { 
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
+    padding: 40px;
+    background: #d1cbc0; 
+    border: 2px dashed var(--accent-gray);
+}
+
+/* Oculta la segunda unidad en el monitor */
+.solo-impresion {
+    display: none;
+}
+
+/* ==========================================================
+   PARTE 2: MÓDULO VISUAL DEL CARNET (COMÚN)
+   ========================================================== */
+.loto-card {
+    width: var(--loto-width);
+    height: var(--loto-height);
+    position: relative;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+.face-a { background-image: url('Assets/frente.png'); }
+.face-b { background-image: url('Assets/reverso.png'); }
+
+.photo-box {
+    position: absolute;
+    top: 59mm;            
+    left: 20.35mm;    
+    width: 29.3mm;    
+    height: 37.7mm;   
+    border: 1.5px solid red;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%; 
+}
+
+.field-nombre {
+    position: absolute;
+    top: 100mm; 
+    left: 3mm;
+    font-size: 9pt;
+    font-weight: bold;
+    color: #000;
+    width: 60mm;
+}
+
+.field-depto {
+    position: absolute;
+    top: 114mm;
+    left: 3mm;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000;
+    width: 60mm;
+    line-height: 1.1;
+}
+
+/* ==========================================================
+   PARTE 3: CONFIGURACIÓN TÉCNICA DE IMPRESIÓN (CALIBRADA)
+   ========================================================== */
+@media print {
+    @page {
+        size: letter;
+        margin: 0 !important;
+    }
+
+    html, body {
+        background: #fff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .no-print { display: none !important; }
+
+    /* Muestra la unidad duplicada solo en papel */
+    .solo-impresion { 
+        display: block !important; 
+    }
+
+    .page-wrapper {
+        position: relative;
+        width: 215.9mm;
+        height: 279.4mm;
+        page-break-after: always;
+        display: flex;
+        justify-content: center; /* Calce horizontal */
+        background: transparent !important;
+    }
+
+    .grid-impresion {
+        display: grid;
+        grid-template-columns: repeat(2, 70mm); 
+        gap: 15mm; /* Espacio para el corte */
+        margin: 0 auto;
+    }
+
+    #print-area {
+        display: block; 
+        background: none;
+        padding: 0;
+        border: none;
+    }
+
+    /* TUS AJUSTES PERFECTOS */
+    .posicion-frente {
+        top: 9mm !important; 
+    }
+
+    .posicion-reverso {
+        top: 27mm !important; 
+    }
+}
