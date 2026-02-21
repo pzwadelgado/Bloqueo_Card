@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema LOTO - Generador de Etiquetas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="no-print" id="admin-panel">
+        <div class="card-panel">
+            <h2>GENERADOR DE ETIQUETAS LOTO</h2>
+            <div class="input-group">
+                <input type="text" id="input-codigo" placeholder="Código Trabajador (Col. D)">
+                <button onclick="buscarEmpleado()">🔍 Buscar</button>
+            </div>
+            
+            <div id="upload-section" style="display:none; margin-top:20px;">
+                <p>✅ Trabajador: <strong id="nombre-detectado"></strong></p>
+                <label>Cargar Fotografía:</label>
+                <input type="file" id="input-foto" accept="image/*" onchange="procesarFoto()">
+                <hr>
+                <button class="btn-print" onclick="window.print()">🖨️ Imprimir 2 Unidades</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="print-area"></div>
+
+    <script src="database.js"></script>
+    <script src="logic.js"></script>
+</body>
+</html>
