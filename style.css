@@ -211,7 +211,7 @@ button:hover {
     }
 
     .posicion-reverso {
-        top: 27mm !important;   /* Tu ajuste de alto perfecto */
+        top: 17mm !important;   /* Tu ajuste de alto perfecto */
         left: 0mm !important;   /* MODIFICA AQUÍ para alinear con el frente */
         position: relative;
     }
