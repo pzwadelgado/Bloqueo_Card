@@ -205,8 +205,8 @@ button:hover {
     /* --- SECCIÓN DE AJUSTE MANUAL DEFINITIVO --- */
 
     .posicion-frente {
-        top: 7mm !important;    /* Tu ajuste de alto perfecto */
-        left: 0mm !important;   /* MODIFICA AQUÍ: ej. 2mm o -2mm para calce lateral */
+        top: 16mm !important;    /* Tu ajuste de alto perfecto */
+        left: -1mm !important;   /* MODIFICA AQUÍ: ej. 2mm o -2mm para calce lateral */
         position: relative;
     }
 
